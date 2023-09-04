@@ -15,6 +15,12 @@ function App() {
   function taskFilter(category) {
     setClickCategory(category)
   }
+
+  function handleDeleteTask(taskText) {
+    const newTasksArray = tasksArray.filter((task) => (task.text !== taskText))
+    setTasksArray(newTasksArray)
+  }
+
   const filterArray = tasksArray.filter((task)=> {
      if (clickedCategory === "All") return true
       return task.category === clickedCategory
@@ -33,7 +39,7 @@ function App() {
         taskFilter={taskFilter}
       />
       <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={addTask}/>
-      <TaskList tasks={filterArray}/>
+      <TaskList tasks={filterArray} onDelete={handleDeleteTask}/>
     </div>
   );
 }
